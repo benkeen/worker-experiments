@@ -3,9 +3,12 @@
 <head>
 
 <script>
-function doStuff1() {
-	var myWorker = new Worker('worker.js');
-	myWorker.postMessage({ blah: 123 });
+function doStuff1(filename) {
+	var myWorker = new Worker(filename);
+	myWorker.postMessage({
+        blah: 123,
+        otherWorkers: ['subworker1.js', 'subworker2.js']
+	});
 
 	myWorker.onmessage = function(a) {
 		document.getElementById("result").innerHTML = a.data.result;
@@ -15,7 +18,7 @@ function doStuff1() {
 </head>
 <body>
 <p>
-    <button onClick="doStuff1()">Do work 1</button>
+    <button onClick="doStuff1('worker.js')">Do work 1</button>
 </p>
 
 <div id="result"></div>
