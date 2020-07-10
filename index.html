@@ -1,0 +1,24 @@
+<!doctype>
+<html>
+<head>
+
+<script>
+function doStuff1() {
+	var myWorker = new Worker('worker.js');
+	myWorker.postMessage({ blah: 123 });
+
+	myWorker.onmessage = function(a) {
+		document.getElementById("result").innerHTML = a.data.result;
+    };
+}
+</script>
+</head>
+<body>
+<p>
+    <button onClick="doStuff1()">Do work 1</button>
+</p>
+
+<div id="result"></div>
+
+</body>
+</html>
